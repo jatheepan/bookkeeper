@@ -1,5 +1,5 @@
 "use strict";
-const router = require('express').Router();
+const router = module.exports = require('express').Router();
 const userManager = require('../lib/UserManager');
 
 
@@ -21,4 +21,5 @@ router.get('/:id', (req, res, next) => {
         }))
         .catch(err => next(err));
 });
-module.exports = router;
+
+// module.exports = router;

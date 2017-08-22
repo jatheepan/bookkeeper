@@ -14,13 +14,8 @@ module.exports = {
         connect: function() {
             return new Promise((resolve, reject) => {
                 mysqlConnection.getConnection((err, connection) => {
-                    if(err) {
-                        reject(err);
-                    } else {
-                        resolve(connection);
-                    }
-
-
+                    if(err) reject(err);
+                    resolve(connection);
                 });
             });
         }
