@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Income = new Schema({
+const income = new Schema({
     account_id: Number,
     amount: Number,
     created: Date,
@@ -20,4 +20,4 @@ const Income = new Schema({
     user_id: Number
 });
 
-module.exports = mongoose.model('Income', Income);
+module.exports = mongoose.model('Income', income);
