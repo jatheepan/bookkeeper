@@ -1,18 +1,23 @@
 "use strict";
 
 let express = require('express');
-let favicon = require('serve-favicon');
+
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
 let app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(cors);
+app.use(cors());
+mongoose.connect('mongodb://localhost/bookkeeper');
+
+mongoose.connection.on('error', console.log.bind(console, 'Unable to connect to mongo'));
+mongoose.connection.on('open', console.info.bind(console, 'Mongo connection established'));
 
 require('./routes/index')(app);
 

@@ -11,13 +11,9 @@ const mysqlConnection = mysql.createPool({
 
 module.exports = {
     mysql: {
-        connect: function() {
-            return new Promise((resolve, reject) => {
-                mysqlConnection.getConnection((err, connection) => {
-                    if(err) reject(err);
-                    resolve(connection);
-                });
-            });
-        }
+        connect: () => new Promise((resolve, reject) => {
+            mysqlConnection.getConnection((err, connection) => (err) ? reject(err) :
+                resolve(connection));
+        })
     }
 };
