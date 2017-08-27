@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+require('./Province');
 const income = new Schema({
     account_id: Number,
     amount: Number,
@@ -16,6 +16,10 @@ const income = new Schema({
     modified: Date,
     prorated_amount: Number,
     province_id: Number,
+    _province: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Province'
+    },
     user_entered_hst: Boolean,
     user_id: Number
 });

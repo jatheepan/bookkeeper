@@ -15,6 +15,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(cors());
 mongoose.connect('mongodb://localhost/bookkeeper');
+// require('./models/Province');
+// require('./models/Income');
 
 mongoose.connection.on('error', console.log.bind(console, 'Unable to connect to mongo'));
 mongoose.connection.on('open', console.info.bind(console, 'Mongo connection established'));
