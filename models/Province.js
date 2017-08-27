@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 
 const province = new Schema({
     hst: Number,
-    id: Number,
     title: String
 });
 

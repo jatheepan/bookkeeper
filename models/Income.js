@@ -9,7 +9,6 @@ const income = new Schema({
     created: Date,
     date: Date,
     hst_amount: Number,
-    id: Number,
     income_account_id: Number,
     invoice_no: Number,
     issued_to: String,
