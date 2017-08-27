@@ -1,9 +1,8 @@
 "use strict";
 
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const Expense = new Schema({
+const Expense = new mongoose.Schema({
     date: Date,
     issued_by: String,
     invoice_no: Number,
@@ -24,4 +23,5 @@ const Expense = new Schema({
     modified: Date
 });
 
+Expense.plugin(require('mongoose-paginate'));
 module.exports = mongoose.model('Expense', Expense);
