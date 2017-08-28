@@ -1,9 +1,9 @@
 "use strict";
 
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 require('./Province');
-const income = new Schema({
+
+const income = new mongoose.Schema({
     account_id: Number,
     amount: Number,
     created: Date,
@@ -12,7 +12,10 @@ const income = new Schema({
     income_account_id: Number,
     invoice_no: Number,
     issued_to: String,
-    modified: Date,
+    modified: {
+        type: Date,
+        default: Date.now
+    },
     prorated_amount: Number,
     province_id: Number,
     _province: {
@@ -23,4 +26,5 @@ const income = new Schema({
     user_id: Number
 });
 
+income.plugin(require('mongoose-paginate'));
 module.exports = mongoose.model('Income', income);

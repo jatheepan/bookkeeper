@@ -10,14 +10,11 @@ const IncomeModel = require('../models/Income');
 
 router.get('/', (req, res, next) => {
     IncomeManager.getIncomes()
-        .then(incomes => {
-            (incomes || []).forEach(income => {
-                income.user_entered_hst = !!income.user_entered_hst;
-            });
-            res.jsonp({
-                success: true,
-                data: incomes
-            });
+        .then(result => {
+            result.data = result.docs;
+            result.success = true;
+            delete result.docs;
+            res.jsonp(result);
         })
         .catch(err => next(err));
 });
