@@ -18,3 +18,10 @@ router.get('/', (req, res, next) => {
         })
         .catch(err => next(err));
 });
+
+router.get('/:id', (req, res, next) => {
+    IncomeManager.getIncomeById(req.params.id)
+        .then(data => res.jsonp({data}))
+        .catch(err => next(err));
+});
+
