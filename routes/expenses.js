@@ -13,3 +13,14 @@ route.get('/', (req, res, next) => {
         })
         .catch(err => next(err));
 });
+
+route.get('/:id', (req, res, next) => {
+    return ExpenseManager.getExpense(req.params.id, (err, data) => {
+        if(err) {
+            return next(err);
+        }
+        res.jsonp({
+            data
+        });
+    });
+});
