@@ -9,7 +9,7 @@ const income = new mongoose.Schema({
     created: Date,
     date: Date,
     hst_amount: Number,
-    income_type: {
+    income_account: {
         type: String,
         enum: [
             'Business Income',
