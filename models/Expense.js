@@ -16,7 +16,16 @@ const Expense = new mongoose.Schema({
     },
     user_id: Number,
     account_id: Number,
-    expense_type_id: Number,
+    expense_type: {
+        type: String,
+        enum: [
+            'Deductible Expenses',
+            'Business use of Home',
+            'Business use of Motor Vehicle',
+            'Rental Business'
+        ],
+        default: 'Deductible Expenses'
+    },
     expense_account_id: Number,
     pf_expense_account_id: Number,
     created: Date,

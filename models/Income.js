@@ -9,7 +9,17 @@ const income = new mongoose.Schema({
     created: Date,
     date: Date,
     hst_amount: Number,
-    income_account_id: Number,
+    income_type: {
+        type: String,
+        enum: [
+            'Business Income',
+            'Professional Income',
+            'Rental Property Income',
+            'Other Income',
+            'Non Taxable Income'
+        ],
+        default: 'Business Income'
+    },
     invoice_no: Number,
     issued_to: String,
     modified: {
