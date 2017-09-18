@@ -8,7 +8,7 @@ route.get('/', (req, res, next) => {
         .then(result => {
             result.data = result.docs;
             delete result.docs;
-            result.success = true;
+            resutlt.success = true;
             res.jsonp(result);
         })
         .catch(err => next(err));
