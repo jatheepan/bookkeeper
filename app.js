@@ -19,7 +19,32 @@ mongoose.connect('mongodb://localhost/bookkeeper');
 mongoose.connection.on('error', console.log.bind(console, 'Unable to connect to mongo'));
 mongoose.connection.on('open', console.info.bind(console, 'Mongo connection established'));
 
+const Model = require('./models/User');
+const squel = require('squel');
+const mysql = require('./config/db').mysql;
+
 require('./routes/index')(app);
+app.use('/reconcile', (req, res, next) => {
+    const query = "SELECT * FROM users"
+
+    mysql.connect().then(connection => {
+        connection.query(query, (err, data) => {
+            data.forEach(record => {
+                const instance = new Model(record);
+                instance.save();
+            });
+        });
+    });
+    res.jsonp({
+        success: true
+    })
+});
+
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+});
 
 // catch 404 and forward to error handler}
 app.use(function(req, res, next) {
@@ -28,8 +53,17 @@ app.use(function(req, res, next) {
     next(err);
 });
 
+
+app.use(function(req, res, next) {
+    console.log('came here');
+    if(!err) {
+        console.log('fuck yea');
+    }
+});
+
 // error handler
 app.use(function(err, req, res, next) {
+    console.log('error handler');
     let status = 500;
     let message = '';
 
